@@ -37,3 +37,7 @@ body {
     margin: 5px;
     display:inline-block;
 }
+
+a img {
+    cursor: pointer;
+}

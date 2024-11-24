@@ -19,9 +19,7 @@ namespace SimpleShop.Controllers
 
         public IActionResult Index()
         {
-            var products = _context.Products.ToList();
-
-            return View(products);
+            return View();
         }
 
         public IActionResult ProductDetail()
@@ -39,7 +37,7 @@ namespace SimpleShop.Controllers
 
             var shoppingCartItem = new ShopingCartItem()
             {
-                ProdcutId = productId,
+                ProductId = productId,
                 //CartId = 1,
                 Count = 1
             };

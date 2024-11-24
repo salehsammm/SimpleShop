@@ -1,5 +1,4 @@
-﻿@model IEnumerable<Product>
-
+﻿
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -8,7 +7,7 @@
     <div class="col-10">
         <input ng-model="filterText" class="input-search" type="text" placeholder="جستجو" />
 
-        <div ng-repeat="product in products" class="col-3 box-product">
+        <div ng-repeat="product in products | filter:{name: filterText}" class="col-3 box-product">
             <a ng-click="GoToDetail(product.Id)" class="card">
                 <img src="{{product.imgUrl}}" />
             </a>

@@ -1,6 +1,8 @@
 ﻿var app = angular.module("MyApp", []);
 app.controller("MyCtrl", function ($scope, $compile, $http) {
 
+    $scope.filterText = '';
+
     $scope.products = [];
     $scope.Cartproducts = [];
     $http.get('/Home/GetProducts')
