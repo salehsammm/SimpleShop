@@ -2,15 +2,14 @@
 {
     public class ShopingCartItem
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int Count { get; set; }
-        public int Price { get; set; }
 
         //Navigation
-        public int ProdcutId { get; set; }
-        public Product? product { get; set; }
+        public int ProductId { get; set; }
+        public Product? Product { get; set; }
 
-        //public int CartId { get; set; }
-        //public ShopingCart shopingCart { get; set; }
+        public int ShopingCartId { get; set; }
+        public ShopingCart? ShopingCart { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SimpleShop.Data;
 
@@ -10,9 +11,11 @@ using SimpleShop.Data;
 namespace SimpleShop.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    partial class ShopContextModelSnapshot : ModelSnapshot
+    [Migration("20241124153023_pc1")]
+    partial class pc1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,6 +56,9 @@ namespace SimpleShop.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("totalPrice")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("shopingCarts");
@@ -60,14 +66,11 @@ namespace SimpleShop.Migrations
 
             modelBuilder.Entity("SimpleShop.Models.ShopingCartItem", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CartId")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<int>("Count")
                         .HasColumnType("int");
@@ -78,41 +81,37 @@ namespace SimpleShop.Migrations
                     b.Property<int>("ProdcutId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductId")
+                    b.Property<int?>("ShopingCartId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ShopingCartId")
+                    b.Property<int?>("productId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
+                    b.HasKey("id");
 
                     b.HasIndex("ShopingCartId");
+
+                    b.HasIndex("productId");
 
                     b.ToTable("shopingCartItems");
                 });
 
             modelBuilder.Entity("SimpleShop.Models.ShopingCartItem", b =>
                 {
-                    b.HasOne("SimpleShop.Models.Product", "Product")
+                    b.HasOne("SimpleShop.Models.ShopingCart", null)
+                        .WithMany("products")
+                        .HasForeignKey("ShopingCartId");
+
+                    b.HasOne("SimpleShop.Models.Product", "product")
                         .WithMany()
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("productId");
 
-                    b.HasOne("SimpleShop.Models.ShopingCart", "ShopingCart")
-                        .WithMany("Products")
-                        .HasForeignKey("ShopingCartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("ShopingCart");
+                    b.Navigation("product");
                 });
 
             modelBuilder.Entity("SimpleShop.Models.ShopingCart", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("products");
                 });
 #pragma warning restore 612, 618
         }
