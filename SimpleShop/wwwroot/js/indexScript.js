@@ -36,8 +36,8 @@ app.controller("MyCtrl", function ($scope, $compile, $http) {
         window.location.href = "/Home/ProductDetail";
     }
 
-    $scope.Test = function () {
-        alert("Test");
+    $scope.DeleteProduct = function () {
+        CartPros.pop();
     }
 
 });

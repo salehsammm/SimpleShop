@@ -34,5 +34,6 @@ body {
 }
 
 .box-product{
+    margin: 5px;
     display:inline-block;
 }
