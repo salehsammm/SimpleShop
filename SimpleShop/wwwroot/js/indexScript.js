@@ -9,6 +9,7 @@ app.controller("MyCtrl", function ($scope, $compile, $http) {
             $scope.cartItems = response.data.shopingCartItems;
         });
 
+    var CartPros = [];
     $scope.AddToCart = function (productId) {
         //alert(productId);
         $.ajax({
@@ -20,6 +21,9 @@ app.controller("MyCtrl", function ($scope, $compile, $http) {
             datatype: "json",
             success: function (data) {
                 $scope.Cartproducts = data;
+                CartPros.push(data);
+                $scope.Cartproducts = CartPros;
+
                 $scope.$apply();
             }
         });
@@ -27,8 +31,9 @@ app.controller("MyCtrl", function ($scope, $compile, $http) {
     }
 
     $scope.GoToDetail = function (productId) {
-
-        alert($scope.productId);
+        //alert(productId);
+        $scope.productId = productId;
+        window.location.href = "/Home/ProductDetail";
     }
 
     $scope.Test = function () {

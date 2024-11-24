@@ -19,6 +19,7 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color : lightgrey;
 }
 
 .btn-add{
@@ -27,8 +28,9 @@ body {
 }
 
 .input-search{
-    margin: 30px;
+    margin: 30px 5px;
     font-size: 20px;
+    width: 75%;
 }
 
 .box-product{

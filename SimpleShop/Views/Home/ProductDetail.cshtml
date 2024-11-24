@@ -4,7 +4,16 @@
 }
 
 <h1>ProductDetail</h1>
+{{Products[productId].imgUrl}}
 <div>
-    <img />
+    <img src="{{Products[productId].imgUrl}}" />
+    <div>{{Products[productId].name}}</div>
+    <div>{{products[productId].price}}</div>
 </div>
+
+
+
+@section Script {
+    <script src="js/indexScript.js"></script>
+}
 

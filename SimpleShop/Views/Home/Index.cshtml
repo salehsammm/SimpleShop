@@ -1,26 +1,50 @@
-﻿@{
+﻿@model IEnumerable<Product>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
+<div class="row">
+    <div class="col-10">
+
+        <input ng-model="filterText" class="input-search" type="text" placeholder="جستجو" />
+
+        @foreach (var product in Model)
+        {
+            <div class="col-3 box-product">
+                <a ng-click="GoToDetail(@product.Id)" class="card">
+                    <img src="@product.ImgUrl" />
+                </a>
+                <div class="fw-bold">@product.Name</div>
+                <div>قیمت : @product.Price تومان</div>
+                <a ng-click="AddToCart(@product.Id)" class="btn btn-success btn-add">
+                    افزودن به سبد خرید
+                </a>
+            </div>
+        }
+    </div>
+    <div class="col-2">
         سبد خرید :
-<div ng-repeat="item in Cartproducts">
-    <div>
-        {{item.name}}
-        {{item.price}}
-        {{item.Price}}
-        {{item.Name}}
-        <hr />
-        {{item}}
+        <div ng-repeat="item in Cartproducts">
+            <div>
+                <a href="#" class="list-group-item list-group-item-action list-group-item-primary">
+                    {{item.name}} --
+                    {{item.price}} --
+                </a>
+            </div>
+        </div>
     </div>
 </div>
+<hr />
+
+
+<input ng-model="filterText1" class="input-search" type="text" placeholder="جستجو" />
 
 <div class="row">
-    <input class="input-search" type="text" placeholder="جستجو" />
+    <div ng-repeat="product in products | filter : 'A'">
+        <div ng->
 
-    
-
-
-    <div ng-repeat="product in products">
+        </div>
         <div class="col-4 box-product">
             <a ng-click="GoToDetail(product.Id)" class="card">
                 <img src="{{product.imgUrl}}" />
@@ -36,33 +60,10 @@
 
 
 
+
+
 </>
 
 @section Script {
     <script src="js/indexScript.js"></script>
 }
-
-@* <div class="col-4 box-product">
-    <a ng-click="GoToDetail(product.Id)" class="card">
-        <img src="/Image/soupJo.jpg" />
-    </a>
-    <a class="btn btn-success btn-add">
-        افزودن به سبد خرید
-    </a>
-</div>
-<div class="col-4 box-product">
-    <a ng-click="GoToDetail(product.Id)" class="card">
-        <img src="/Image/soupJo.jpg" />
-    </a>
-    <a class="btn btn-success btn-add">
-        افزودن به سبد خرید
-    </a>
-</div>
-<div class="col-4 box-product">
-    <a ng-click="GoToDetail(product.Id)" class="card">
-        <img src="/Image/soupJo.jpg" />
-    </a>
-    <a class="btn btn-success btn-add">
-        افزودن به سبد خرید
-    </a>
-</div> *@
