@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SimpleShop.Data;
 
@@ -10,9 +11,11 @@ using SimpleShop.Data;
 namespace SimpleShop.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    partial class ShopContextModelSnapshot : ModelSnapshot
+    [Migration("20241124013348_4")]
+    partial class _4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,6 +72,9 @@ namespace SimpleShop.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
@@ -78,32 +84,38 @@ namespace SimpleShop.Migrations
                     b.Property<int>("ProdcutId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ShopingCartId")
+                    b.Property<int>("productId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("productId")
+                    b.Property<int>("shopingCartId")
                         .HasColumnType("int");
 
                     b.HasKey("id");
 
-                    b.HasIndex("ShopingCartId");
-
                     b.HasIndex("productId");
+
+                    b.HasIndex("shopingCartId");
 
                     b.ToTable("shopingCartItems");
                 });
 
             modelBuilder.Entity("SimpleShop.Models.ShopingCartItem", b =>
                 {
-                    b.HasOne("SimpleShop.Models.ShopingCart", null)
-                        .WithMany("products")
-                        .HasForeignKey("ShopingCartId");
-
                     b.HasOne("SimpleShop.Models.Product", "product")
                         .WithMany()
-                        .HasForeignKey("productId");
+                        .HasForeignKey("productId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SimpleShop.Models.ShopingCart", "shopingCart")
+                        .WithMany("products")
+                        .HasForeignKey("shopingCartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("product");
+
+                    b.Navigation("shopingCart");
                 });
 
             modelBuilder.Entity("SimpleShop.Models.ShopingCart", b =>

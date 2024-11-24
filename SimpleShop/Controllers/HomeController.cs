@@ -29,20 +29,25 @@ namespace SimpleShop.Controllers
 
         public JsonResult AddToCart(int productId)
         {
-            var product = _context.Products.FirstOrDefault(p=>p.Id == productId);
+            var product = _context.Products.FirstOrDefault(p => p.Id == productId);
+            //if (!(_context.shopingCarts.Any()))
+            //{
+            //    var shoppingCart = new ShopingCart();
+            //}
+
             var shoppingCartItem = new ShopingCartItem()
             {
                 ProdcutId = productId,
+                //CartId = 1,
                 Count = 1
             };
             _context.shopingCartItems.Add(shoppingCartItem);
 
-            return Json(1);
+            return Json(product);
         }
 
         public JsonResult GoToDetail()
         {
-
             return Json(1);
         }
 

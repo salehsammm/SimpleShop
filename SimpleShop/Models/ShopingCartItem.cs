@@ -8,9 +8,9 @@
 
         //Navigation
         public int ProdcutId { get; set; }
-        public Product product { get; set; }
+        public Product? product { get; set; }
 
-        public int CartId { get; set; }
-        public ShopingCart shopingCart { get; set; }
+        //public int CartId { get; set; }
+        //public ShopingCart shopingCart { get; set; }
     }
 }

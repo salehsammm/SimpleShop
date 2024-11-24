@@ -2,16 +2,15 @@
 app.controller("MyCtrl", function ($scope, $compile, $http) {
 
     $scope.products = [];
+    $scope.Cartproducts = [];
     $http.get('/Home/GetProducts')
         .then(function (response) {
             $scope.products = response.data.products;
-            $scope.cartItems = response.data.sh;
+            $scope.cartItems = response.data.shopingCartItems;
         });
 
     $scope.AddToCart = function (productId) {
-        var productId = $scope.productId;
-        alert(productId);
-
+        //alert(productId);
         $.ajax({
             type: "post",
             url: "/Home/AddToCart",
@@ -20,7 +19,8 @@ app.controller("MyCtrl", function ($scope, $compile, $http) {
             },
             datatype: "json",
             success: function (data) {
-                alert("test");
+                $scope.Cartproducts = data;
+                $scope.$apply();
             }
         });
 
