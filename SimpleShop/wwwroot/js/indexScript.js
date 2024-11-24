@@ -23,13 +23,9 @@ app.controller("MyCtrl", function ($scope, $compile, $http) {
             datatype: "json",
             success: function (data) {
                 $scope.Cartproducts = data;
-                CartPros.push(data);
-                $scope.Cartproducts = CartPros;
-
                 $scope.$apply();
             }
         });
-
     }
 
     $scope.GoToDetail = function (productId) {
@@ -38,8 +34,20 @@ app.controller("MyCtrl", function ($scope, $compile, $http) {
         window.location.href = "/Home/ProductDetail";
     }
 
-    $scope.DeleteProduct = function () {
-        CartPros.pop();
+    $scope.DeleteProduct = function (productId) {
+        alert(productId);
+        //$.ajax({
+        //    type: "post",
+        //    url: "/Home/DeleteProduct",
+        //    data: {
+        //        productId: productId
+        //    },
+        //    datatype: "json",
+        //    success: function (data) {
+        //        $scope.Cartproducts = data;
+        //        $scope.$apply();
+        //    }
+        //});
     }
 
 });

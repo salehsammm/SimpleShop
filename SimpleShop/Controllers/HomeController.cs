@@ -27,24 +27,35 @@ namespace SimpleShop.Controllers
             return View();
         }
 
-        public JsonResult AddToCart(int productId)
+		private static List<ShopingCartItem> TemporaryCart = new List<ShopingCartItem>();
+		public JsonResult AddToCart(int productId)
         {
             var product = _context.Products.FirstOrDefault(p => p.Id == productId);
-            //if (!(_context.shopingCarts.Any()))
-            //{
-            //    var shoppingCart = new ShopingCart();
-            //}
+			var cartItem = TemporaryCart.FirstOrDefault(item => item.ProductId == productId);
+			if (cartItem != null)
+			{
+				cartItem.Count++;
+			}
+			else
+			{				
+				TemporaryCart.Add(new ShopingCartItem
+				{
+					Id = TemporaryCart.Count + 1,
+					ProductId = productId,
+					Product = product,
+					Count = 1
+				});
+			}
 
-            var shoppingCartItem = new ShopingCartItem()
-            {
-                ProductId = productId,
-                //CartId = 1,
-                Count = 1
-            };
-            _context.shopingCartItems.Add(shoppingCartItem);
 
-            return Json(product);
-        }
+			return Json(TemporaryCart.Select(item => new
+			{
+				item.Id,
+				item.Product?.Name,
+				item.Product?.Price,
+				item.Count
+			}));
+		}
 
         public JsonResult GoToDetail()
         {
@@ -62,5 +73,22 @@ namespace SimpleShop.Controllers
 
             return Json(data);
         }
-    }
+
+		public JsonResult DeleteProduct(int productId)
+		{
+			var removeItem = TemporaryCart.FirstOrDefault(item => item.ProductId == productId);
+			if (removeItem != null)
+			{
+				TemporaryCart.Remove(removeItem);
+			}
+
+			return Json(TemporaryCart.Select(item => new
+			{
+				item.Id,
+				item.Product?.Name,
+				item.Product?.Price,
+				item.Count
+			}));
+		}
+	}
 }

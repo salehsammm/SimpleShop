@@ -31,11 +31,12 @@
             </thead>
             <tbody>
                 <tr ng-repeat="item in Cartproducts">
+                    {{item}}
                     <td>{{item.name}}</td>
-                    <td>1</td>
+                    <td>{{item.count}}</td>
                     <td>{{item.price}}</td>
                     <td>
-                        <a ng-click="DeleteProduct()">حذف</a>
+                        <a ng-click="DeleteProduct(item.id)">حذف</a>
                     </td>
                 </tr>
             </tbody>
