@@ -35,19 +35,19 @@ app.controller("MyCtrl", function ($scope, $compile, $http) {
     }
 
     $scope.DeleteProduct = function (productId) {
-        alert(productId);
-        //$.ajax({
-        //    type: "post",
-        //    url: "/Home/DeleteProduct",
-        //    data: {
-        //        productId: productId
-        //    },
-        //    datatype: "json",
-        //    success: function (data) {
-        //        $scope.Cartproducts = data;
-        //        $scope.$apply();
-        //    }
-        //});
+        //alert(productId);
+        $.ajax({
+            type: "post",
+            url: "/Home/DeleteProduct",
+            data: {
+                productId: productId
+            },
+            datatype: "json",
+            success: function (data) {
+                $scope.Cartproducts = data;
+                $scope.$apply();
+            }
+        });
     }
 
 });

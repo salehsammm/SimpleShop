@@ -40,7 +40,7 @@ namespace SimpleShop.Controllers
 			{				
 				TemporaryCart.Add(new ShopingCartItem
 				{
-					Id = TemporaryCart.Count + 1,
+					Id = productId,
 					ProductId = productId,
 					Product = product,
 					Count = 1
