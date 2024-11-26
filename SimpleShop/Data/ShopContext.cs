@@ -12,7 +12,13 @@ namespace SimpleShop.Data
         }
 
         public DbSet<Product> Products { get; set; }
-        public DbSet<ShopingCartItem> shopingCartItems { get; set; }
-        public DbSet<ShopingCart> shopingCarts { get; set; }
+        public DbSet<ShopingCartItem> ShopingCartItems { get; set; }
+        public DbSet<ShopingCart> ShopingCarts { get; set; }
+        public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

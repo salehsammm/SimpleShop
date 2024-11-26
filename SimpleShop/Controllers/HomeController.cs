@@ -68,7 +68,7 @@ namespace SimpleShop.Controllers
             indexData data = new indexData()
             {
                 products = _context.Products.ToList(),
-                shopingCartItems = _context.shopingCartItems.ToList()
+                shopingCartItems = _context.ShopingCartItems.ToList()
             };
 
             return Json(data);

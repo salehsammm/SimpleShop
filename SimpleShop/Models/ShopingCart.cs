@@ -3,6 +3,11 @@
     public class ShopingCart
     {
         public int Id { get; set; }
-        public IList<ShopingCartItem>? Products { get; set; }        
+
+        //Navigation
+        public IList<ShopingCartItem>? Products { get; set; }
+
+        public required User User { get; set; }
+        public int UserId { get; set; }
     }
 }
